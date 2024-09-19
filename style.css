@@ -36,7 +36,6 @@ body {
 }
 
 header,
-main,
 footer {
     max-width: var(--max-width);
     padding: var(--padding);
@@ -56,4 +55,58 @@ footer {
 
 main {
     min-height: calc(100vh - var(--header-height) - var(--footer-height));
+    max-width: var(--max-width);
+    border: var(--border);
+    margin: 0 auto;
+}
+
+
+.banner, .profile, .show{
+    height :500px;
+    width : 100%;
+    background: yellow;
+    ul{
+        list-style: none;
+    }
+
+    .cards-list{
+        .slide{
+            display : inline-block;
+            background: green;
+            transition: background .5s;
+        }
+        .slide.prev{
+            background: red;
+        }
+        .slide.active{
+            background: blue;
+        }
+        .slide.next{
+            background: red;
+        }
+    }
+    .bullets-list{
+        
+        .bullet{
+            display : inline-block;
+            .button{
+                background: orange;
+            }
+        }
+        .bullet.prev{
+            .button{
+                background: red;
+            }
+        }
+        .bullet.active{
+            .button{
+                background: blue;
+            }
+        }
+        .bullet.next{
+            .button{
+                background: red;
+            }
+        }
+    }
 }
