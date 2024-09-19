@@ -70,8 +70,7 @@ function createSlider(className, speed) {
         bullets[nextIndex].classList.add('next')
     }
 
-
-    setInterval(renderSlider, speed)
+    if(speed)setInterval(renderSlider, speed)
 
 }
 
@@ -81,7 +80,7 @@ function createSlider(className, speed) {
 
 createSlider('.banner' , 1000)
 createSlider('.profile' , 2000)
-createSlider('.show' , 3000)
+createSlider('.show')
 
 
 // helpers
