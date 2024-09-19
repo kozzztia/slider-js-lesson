@@ -55,104 +55,110 @@ footer {
 
 main {
     min-height: calc(100vh - var(--header-height) - var(--footer-height));
+    height: auto;
     max-width: var(--max-width);
     border: var(--border);
     margin: 0 auto;
 }
 
 
-.banner, .profile, .show{
-    height :500px;
-    width : 100%;
-    background: yellow;
-    ul{
+.banner,
+.profile,
+.show {
+    height: auto;
+    width: 100%;
+
+    ul {
         list-style: none;
+        padding: 0;
+        margin: 0;
     }
 
     .cards-list {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
         position: relative;
-        height: 360px;
+        display: flex;
+        justify-content: center;
+        transition: all .3s ease-in-out;
+        height: 800px;
         overflow: hidden;
+        
+    }
 
-        .slide {
-            transition: all 1.5s ease-in-out; /* Плавный переход между слайдами */
-            position: absolute;
-            opacity: 0;
+    .slide {
+        transition: opacity .3s ease-in-out, transform .3s ease-in-out;
+        position: absolute;
+        opacity: 0;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        z-index: 1;
+        display: none;
+        overflow: hidden;
+        transform: translateX(0);
+
+        img {
             width: 100%;
-            height: 360px;
-            top: 0;
-            overflow: hidden;
-            padding: 20px;
-            left: 50%; /* Центрируем слайды */
-            transform: translateX(-50%);
-            z-index: 1;
-            display: none; /* Скрываем по умолчанию */
-
-            img {
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-                object-position: center;
-            }
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
         }
 
-        .slide.prev {
-            left: -360px; /* Слайд слева */
+        &.prev {
+            display: block;
+            opacity: 1;
+            transform: translateX(-100%);
+        }
+
+        &.active {
             display: block;
             opacity: 1;
             z-index: 2;
+            transform: translateX(0);
         }
 
-        .slide.active {
-            left: 50%;
+        &.next {
             display: block;
             opacity: 1;
-            transform: translateX(-50%);
-            z-index: 3;
-            background: blue;
-        }
-
-        .slide.next {
-            left: 360px; /* Слайд справа */
-            display: block;
-            opacity: 1;
-            z-index: 2;
+            transform: translateX(100%);
         }
     }
+
+
 
     .bullets-list {
         display: flex;
         justify-content: center;
         margin-top: 10px;
+        transition: background .3s ease-in-out;
 
         .bullet {
             display: inline-block;
             margin: 0 5px;
 
             .button {
-                width: 12px;
-                height: 12px;
+                width: 42px;
+                height: 42px;
                 border-radius: 50%;
                 background: orange;
+                opacity: .5;
                 border: none;
                 cursor: pointer;
-                transition: background 0.5s;
+                transition: background 0.5s, opacity 0.5s;
+            }
+            &.prev .button {
+                opacity: 1;
+            }
+    
+            &.active .button {
+                background: blue;
+                opacity: 1;
+            }
+    
+            &.next .button {
+                opacity: 1;
             }
         }
 
-        .bullet.prev .button {
-            background: red;
-        }
 
-        .bullet.active .button {
-            background: blue;
-        }
-
-        .bullet.next .button {
-            background: red;
-        }
     }
 }
