@@ -69,44 +69,90 @@ main {
         list-style: none;
     }
 
-    .cards-list{
-        .slide{
-            display : inline-block;
-            background: green;
-            transition: background .5s;
+    .cards-list {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        position: relative;
+        height: 360px;
+        overflow: hidden;
+
+        .slide {
+            transition: all 1.5s ease-in-out; /* Плавный переход между слайдами */
+            position: absolute;
+            opacity: 0;
+            width: 100%;
+            height: 360px;
+            top: 0;
+            overflow: hidden;
+            padding: 20px;
+            left: 50%; /* Центрируем слайды */
+            transform: translateX(-50%);
+            z-index: 1;
+            display: none; /* Скрываем по умолчанию */
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                object-position: center;
+            }
         }
-        .slide.prev{
-            background: red;
+
+        .slide.prev {
+            left: -360px; /* Слайд слева */
+            display: block;
+            opacity: 1;
+            z-index: 2;
         }
-        .slide.active{
+
+        .slide.active {
+            left: 50%;
+            display: block;
+            opacity: 1;
+            transform: translateX(-50%);
+            z-index: 3;
             background: blue;
         }
-        .slide.next{
-            background: red;
+
+        .slide.next {
+            left: 360px; /* Слайд справа */
+            display: block;
+            opacity: 1;
+            z-index: 2;
         }
     }
-    .bullets-list{
-        
-        .bullet{
-            display : inline-block;
-            .button{
+
+    .bullets-list {
+        display: flex;
+        justify-content: center;
+        margin-top: 10px;
+
+        .bullet {
+            display: inline-block;
+            margin: 0 5px;
+
+            .button {
+                width: 12px;
+                height: 12px;
+                border-radius: 50%;
                 background: orange;
+                border: none;
+                cursor: pointer;
+                transition: background 0.5s;
             }
         }
-        .bullet.prev{
-            .button{
-                background: red;
-            }
+
+        .bullet.prev .button {
+            background: red;
         }
-        .bullet.active{
-            .button{
-                background: blue;
-            }
+
+        .bullet.active .button {
+            background: blue;
         }
-        .bullet.next{
-            .button{
-                background: red;
-            }
+
+        .bullet.next .button {
+            background: red;
         }
     }
 }

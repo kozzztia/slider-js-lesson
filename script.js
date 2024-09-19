@@ -78,8 +78,8 @@ function createSlider(className, speed) {
 
 
 
-createSlider('.banner' , 1000)
-createSlider('.profile' , 2000)
+createSlider('.banner' , 2000)
+createSlider('.profile' , 3000)
 createSlider('.show')
 
 
