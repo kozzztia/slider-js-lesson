@@ -98,13 +98,15 @@ main {
         user-select: none;
         padding: 10px;
 
-        div {
+
+        .card {
             background: rgb(255, 220, 155);
             height: 100%;
             border-radius: 50px;
             font-size: 30px;
             color: #000;
             text-shadow: 0 0 10px #000;
+            box-shadow: 0 0 10px #000;
         }
 
         &.prev {
@@ -138,18 +140,23 @@ main {
         z-index: 3;
 
         .bullet {
-            display: inline-block;
-            margin: 0 5px;
+            display : inline-block;
+            margin: 5px;
 
             .button {
                 width: 42px;
                 height: 42px;
                 border-radius: 50%;
-                background: orange;
+                background: #eee;
                 opacity: .5;
                 border: none;
                 cursor: pointer;
                 transition: background 0.5s, opacity 0.5s;
+                box-shadow: 0 0 10px #000;
+                
+            }
+            &.prev, &.active, &.next{
+                /* display : inline-block; */
             }
 
             &.prev .button {
@@ -157,7 +164,7 @@ main {
             }
 
             &.active .button {
-                background: blue;
+                background: var(--decore-color);
                 opacity: 1;
             }
 
@@ -175,13 +182,20 @@ main {
         width :50px;
         height: 50px;
         border-radius: 50px;
+        border: none;
+        outline: none;
+        font-size: 50px;
+        color :var(--decore-color);
+        background: inherit;
+        cursor: pointer;
+        text-shadow: 0 0 10px #000;
     }
 
     .next-button {
-        right: 0;
+        right: 20px;
     }
 
     .prev-button {
-        left: 0;
+        left: 20px;
     }
 }
