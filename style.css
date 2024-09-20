@@ -100,13 +100,29 @@ main {
 
 
         .card {
-            background: rgb(255, 220, 155);
             height: 100%;
-            border-radius: 50px;
-            font-size: 30px;
-            color: #000;
-            text-shadow: 0 0 10px #000;
-            box-shadow: 0 0 10px #000;
+           &:has(div){
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            gap: 5px;
+            div{
+                background: red;
+                border-radius: 50px;
+                flex :1;
+                box-shadow: 0 0 10px #000;
+            }
+           }
+           &:not(&:has(div)){
+            &{
+                background: rgb(255, 220, 155);
+                height: 100%;
+                border-radius: 50px;
+                font-size: 30px;
+                color: #000;
+                box-shadow: 0 0 10px #000;
+            }
+           }
         }
 
         &.prev {
@@ -155,10 +171,7 @@ main {
                 box-shadow: 0 0 10px #000;
                 
             }
-            &.prev, &.active, &.next{
-                /* display : inline-block; */
-            }
-
+            
             &.prev .button {
                 opacity: 1;
             }
@@ -189,7 +202,7 @@ main {
         background: inherit;
         cursor: pointer;
         text-shadow: 0 0 10px #000;
-        transform: translate(0, -50%);
+        transform: translate(0, 50%);
     }
 
     .next-button {
