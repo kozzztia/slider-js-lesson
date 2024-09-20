@@ -67,6 +67,7 @@ main {
 .show {
     height: auto;
     width: 100%;
+    position: relative;
 
     ul {
         list-style: none;
@@ -79,7 +80,6 @@ main {
         display: flex;
         justify-content: center;
         transition: all .3s ease-in-out;
-        height: 800px;
         overflow: hidden;
         
     }
@@ -95,12 +95,14 @@ main {
         display: none;
         overflow: hidden;
         transform: translateX(0);
+        user-select: none;
 
         img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             object-position: center;
+            
         }
 
         &.prev {
@@ -122,14 +124,15 @@ main {
             transform: translateX(100%);
         }
     }
-
-
-
     .bullets-list {
         display: flex;
         justify-content: center;
-        margin-top: 10px;
         transition: background .3s ease-in-out;
+        position: absolute;
+        left : 50%;
+        bottom: 0;
+        transform: translate(-50%, -50%);
+        z-index: 3;
 
         .bullet {
             display: inline-block;
@@ -158,7 +161,5 @@ main {
                 opacity: 1;
             }
         }
-
-
     }
 }

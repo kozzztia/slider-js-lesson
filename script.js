@@ -1,13 +1,14 @@
 
 
 
-function createSlider(className, speed) {
+function createSlider(className, speed, height = "800px") {
     const slider = document.querySelector(className);
     const sliderCards = document.querySelectorAll(`${className} >*`);
 
     // Создаем списки слайдов и буллетов
     const sliderCardsList = createElement('ul');
     sliderCardsList.classList.add('cards-list');
+    sliderCardsList.style.height = height;
     const sliderBulletList = createElement('ul');
     sliderBulletList.classList.add('bullets-list');
 
@@ -80,7 +81,7 @@ function createSlider(className, speed) {
     updateSlider();
 }
 
-createSlider('.banner');
+createSlider('.banner', 3000);
 createSlider('.profile');
 createSlider('.show');
 
