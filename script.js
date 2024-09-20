@@ -1,59 +1,99 @@
+function createSlider({ className, speed = 0, height = "800px", pagination = false, navigation = true, }) {
 
-
-
-function createSlider(className, speed, height = "800px") {
     const slider = document.querySelector(className);
     const sliderCards = document.querySelectorAll(`${className} >*`);
 
-    // Создаем списки слайдов и буллетов
+    // Создаем список слайдов
     const sliderCardsList = createElement('ul');
     sliderCardsList.classList.add('cards-list');
     sliderCardsList.style.height = height;
-    const sliderBulletList = createElement('ul');
-    sliderBulletList.classList.add('bullets-list');
 
+    // Создаем список буллетов только если pagination = true
+    let sliderBulletList = null;
+    if (pagination) {
+        sliderBulletList = createElement('ul');
+        sliderBulletList.classList.add('bullets-list');
+    }
+
+    // Создаем сами слайды и буллеты (если pagination)
     sliderCards.forEach((item, i) => {
         const slide = createElement('li');
         slide.classList.add('slide');
         slide.append(item);
         sliderCardsList.appendChild(slide);
 
-        const bullet = createElement('li');
-        bullet.classList.add('bullet');
-        const button = createElement('button');
-        button.classList.add('button');
-        button.innerText = i;
+        if (pagination) {
+            const bullet = createElement('li');
+            bullet.classList.add('bullet');
+            const button = createElement('button');
+            button.classList.add('button');
+            button.innerText = i + 1;
 
-        bullet.append(button);
-        sliderBulletList.appendChild(bullet);
+            bullet.append(button);
+            sliderBulletList.appendChild(bullet);
+        }
     });
 
-    slider.append(sliderCardsList, sliderBulletList);
+    // Добавляем слайды в слайдер
+    slider.append(sliderCardsList);
+
+    // Добавляем буллеты, если pagination включен
+    if (pagination) {
+        slider.append(sliderBulletList);
+    }
+
+    // Добавляем кнопки prev и next, если navigation включен
+    let prevButton = null;
+    let nextButton = null;
+    if (navigation) {
+        prevButton = createElement('button');
+        prevButton.classList.add('prev-button');
+        prevButton.innerText = 'Prev';
+        nextButton = createElement('button');
+        nextButton.classList.add('next-button');
+        nextButton.innerText = 'Next';
+
+        slider.append(prevButton, nextButton);
+    }
 
     // Индексы для управления слайдами
     let prevIndex = 0;
     let activeIndex = 1;
     let nextIndex = 2;
     const slides = document.querySelectorAll(`${className} .cards-list li`);
-    const bullets = document.querySelectorAll(`${className} .bullets-list li`);
+    let bullets = null;
+    if (pagination) {
+        bullets = document.querySelectorAll(`${className} .bullets-list li`);
+    }
 
+    // Функция обновления слайдов
     function updateSlider() {
         slides.forEach((item) => item.classList.remove('prev', 'active', 'next'));
-        bullets.forEach((item) => item.classList.remove('prev', 'active', 'next'));
+        if (pagination) {
+            bullets.forEach((item) => item.classList.remove('prev', 'active', 'next'));
+        }
 
         slides[prevIndex].classList.add('prev');
         slides[activeIndex].classList.add('active');
         slides[nextIndex].classList.add('next');
 
-        bullets[prevIndex].classList.add('prev');
-        bullets[activeIndex].classList.add('active');
-        bullets[nextIndex].classList.add('next');
+        if (pagination) {
+            bullets[prevIndex].classList.add('prev');
+            bullets[activeIndex].classList.add('active');
+            bullets[nextIndex].classList.add('next');
+        }
     }
 
+    // Функции для генерации индексов
     function generateIndex(num, length) {
         return (num + 1) % length;
     }
 
+    function generatePrevIndex(num, length) {
+        return (num - 1 + length) % length;
+    }
+
+    // Функция для автоматического рендеринга
     function renderSlider() {
         prevIndex = generateIndex(prevIndex, slides.length);
         activeIndex = generateIndex(activeIndex, slides.length);
@@ -62,17 +102,32 @@ function createSlider(className, speed, height = "800px") {
         updateSlider();
     }
 
-    // Добавляем кликабельные буллеты
-    bullets.forEach((bullet, index) => {
-        bullet.addEventListener('click', () => {
-            // При клике на буллет обновляем индексы
-            prevIndex = (index - 1 + slides.length) % slides.length;
-            activeIndex = index;
-            nextIndex = (index + 1) % slides.length;
+    // Добавляем кликабельные буллеты, если pagination включен
+    if (pagination) {
+        bullets.forEach((bullet, index) => {
+            bullet.addEventListener('click', () => {
+                prevIndex = (index - 1 + slides.length) % slides.length;
+                activeIndex = index;
+                nextIndex = (index + 1) % slides.length;
 
+                updateSlider();
+            });
+        });
+    }
+
+    // Добавляем обработчики кликов на кнопки prev и next, если navigation включен
+    if (navigation) {
+        prevButton.addEventListener('click', () => {
+            prevIndex = generatePrevIndex(prevIndex, slides.length);
+            activeIndex = generatePrevIndex(activeIndex, slides.length);
+            nextIndex = generatePrevIndex(nextIndex, slides.length);
             updateSlider();
         });
-    });
+
+        nextButton.addEventListener('click', () => {
+            renderSlider();  // Используем функцию для сдвига вперед
+        });
+    }
 
     // Запуск автоматического переключения, если указан speed
     if (speed) setInterval(renderSlider, speed);
@@ -81,9 +136,11 @@ function createSlider(className, speed, height = "800px") {
     updateSlider();
 }
 
-createSlider('.banner', 3000);
-createSlider('.profile');
-createSlider('.show');
+// Примеры вызова слайдера
+// Примеры вызова слайдера
+createSlider({ className: '.banner', speed: 0, height: "800px", pagination: true, navigation: true });  // Слайдер с пагинацией и кнопками
+createSlider({ className: '.profile', speed: 0, height: "500px", pagination: false, navigation: true }); // Слайдер без пагинации и с кнопками
+createSlider({ className: '.show', speed: 1500, height: "600px", pagination: true, navigation: false });  // Слайдер с пагинацией, но без кнопок навигации
 
 // Вспомогательные функции
 function createElement(tag) {
