@@ -171,7 +171,7 @@ main {
                 box-shadow: 0 0 10px #000;
                 
             }
-            
+
             &.prev .button {
                 opacity: 1;
             }
@@ -202,7 +202,7 @@ main {
         background: inherit;
         cursor: pointer;
         text-shadow: 0 0 10px #000;
-        transform: translate(0, 50%);
+        transform: translate(0, -50%);
     }
 
     .next-button {
