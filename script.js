@@ -1,4 +1,4 @@
-function createSlider(options = { className, speed: 0, height: "800px", pagination: false, navigation : true, }) {
+function createSlider(options = {pagination: false, navigation : false, }) {
     const { className, speed, height, pagination, navigation } = options;
 
     const slider = document.querySelector(className);
@@ -132,7 +132,7 @@ function createSlider(options = { className, speed: 0, height: "800px", paginati
     }
 
     // Запуск автоматического переключения, если указан speed
-    if (speed) setInterval(renderSlider, speed);
+    if (speed > 0) setInterval(renderSlider, speed);
 
     // Инициализация первой отрисовки слайдера
     updateSlider();
@@ -141,9 +141,9 @@ function createSlider(options = { className, speed: 0, height: "800px", paginati
 
 // Примеры вызова слайдера
 // Примеры вызова слайдера
-createSlider(options = { className: '.banner', speed: 0, height: "800px", pagination: true, navigation: false });  // Слайдер с пагинацией и кнопками
-createSlider(options = { className: '.profile', speed: 0, height: "500px", pagination: false, navigation: true }); // Слайдер без пагинации и с кнопками
-createSlider(options = { className: '.show', speed: 1500, height: "600px", pagination: false, navigation: false });  // Слайдер с пагинацией, но без кнопок навигации
+createSlider(options = { className: '.banner', height: "800px", pagination: true,});  // Слайдер с пагинацией и кнопками
+createSlider(options = { className: '.profile', height: "500px", navigation: true }); // Слайдер без пагинации и с кнопками
+createSlider(options = { className: '.show', speed: 1500, height: "600px"});  // Слайдер с пагинацией, но без кнопок навигации
 
 // Вспомогательные функции
 function createElement(tag) {
