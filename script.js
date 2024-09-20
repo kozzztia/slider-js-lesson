@@ -2,7 +2,7 @@ function createSlider(options = {pagination: false, navigation : false, }) {
     const { className, speed, height, pagination, navigation } = options;
 
     const slider = document.querySelector(className);
-    const sliderCards = document.querySelectorAll(`${className} >*`);
+    const sliderCards = document.querySelectorAll(`${className} >div`);
 
     // Создаем список слайдов
     const sliderCardsList = createElement('ul');
@@ -141,7 +141,7 @@ function createSlider(options = {pagination: false, navigation : false, }) {
 
 // Примеры вызова слайдера
 // Примеры вызова слайдера
-createSlider(options = { className: '.banner', height: "800px", pagination: true,});  // Слайдер с пагинацией и кнопками
+createSlider(options = { className: '.banner', height: "500px", pagination: true,});  // Слайдер с пагинацией и кнопками
 createSlider(options = { className: '.profile', height: "500px", navigation: true }); // Слайдер без пагинации и с кнопками
 createSlider(options = { className: '.show', speed: 1500, height: "600px"});  // Слайдер с пагинацией, но без кнопок навигации
 

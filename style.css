@@ -105,7 +105,7 @@ main {
             display: flex;
             flex-direction: row;
             justify-content: space-between;
-            gap: 5px;
+            gap: 10px;
             div{
                 background: red;
                 border-radius: 50px;
@@ -116,7 +116,6 @@ main {
            &:not(&:has(div)){
             &{
                 background: rgb(255, 220, 155);
-                height: 100%;
                 border-radius: 50px;
                 font-size: 30px;
                 color: #000;
