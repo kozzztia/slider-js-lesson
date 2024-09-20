@@ -1,20 +1,23 @@
+/* Определяем основные переменные для цветов, размеров и других стилей */
 :root {
-    --main-color: #333;
-    --decore-color: #cfff24;
-    --background-color: #f4f4f4;
-    --font-size: 16px;
-    --max-width: 1400px;
-    --padding: 10px;
-    --border: 1px solid var(--main-color);
-    --header-height: 100px;
-    --footer-height: 200px;
-
+    --main-color: #333; /* Основной цвет */
+    --decore-color: #cfff24; /* Цвет для декоративных элементов */
+    --background-color: #f4f4f4; /* Цвет фона */
+    --font-size: 16px; /* Основной размер шрифта */
+    --max-width: 1400px; /* Максимальная ширина контента */
+    --padding: 10px; /* Внутренние отступы */
+    --border: 1px solid var(--main-color); /* Граница, использующая основной цвет */
+    --header-height: 100px; /* Высота хедера */
+    --footer-height: 200px; /* Высота футера */
+    
+    /* Медиа-запросы для адаптации на средних экранах */
     @media (min-width: 678px) {
         --padding: 10px 30px;
         --header-height: 70px;
         --footer-height: 120px;
     }
 
+    /* Медиа-запросы для больших экранов */
     @media (min-width: 1400px) {
         --padding: 10px 40px;
         --header-height: 70px;
@@ -22,6 +25,7 @@
     }
 }
 
+/* Универсальные стили для всех элементов */
 * {
     margin: 0;
     padding: 0;
@@ -29,186 +33,203 @@
     font-family: Arial, sans-serif;
 }
 
+/* Стили для тела страницы */
 body {
-    background-color: var(--background-color);
-    color: var(--main-color);
-    font-size: var(--font-size);
+    background-color: var(--background-color); /* Цвет фона страницы */
+    color: var(--main-color); /* Основной цвет текста */
+    font-size: var(--font-size); /* Размер шрифта */
 }
 
+/* Хедер и футер: общий стиль */
 header,
 footer {
-    max-width: var(--max-width);
-    padding: var(--padding);
-    border: var(--border);
-    margin: 0 auto;
+    max-width: var(--max-width); /* Ограничение максимальной ширины */
+    padding: var(--padding); /* Внутренние отступы */
+    border: var(--border); /* Границы */
+    margin: 0 auto; /* Центрирование */
 }
 
+/* Хедер с темным фоном */
 header {
-    height: var(--header-height);
-    background: var(--main-color);
+    height: var(--header-height); /* Высота хедера */
+    background: var(--main-color); /* Цвет фона */
 }
 
+/* Футер с темным фоном */
 footer {
-    background: var(--main-color);
-    height: var(--footer-height);
+    background: var(--main-color); /* Цвет фона */
+    height: var(--footer-height); /* Высота футера */
 }
 
+/* Основная часть (main) с динамической высотой */
 main {
-    min-height: calc(100vh - var(--header-height) - var(--footer-height));
-    height: auto;
-    max-width: var(--max-width);
-    border: var(--border);
-    margin: 0 auto;
+    min-height: calc(100vh - var(--header-height) - var(--footer-height)); /* Вычисляемая минимальная высота */
+    height: auto; /* Автоматическая высота */
+    max-width: var(--max-width); /* Ограничение максимальной ширины */
+    border: var(--border); /* Граница */
+    margin: 0 auto; /* Центрирование */
 }
 
-
+/* Стили для слайдера, применимые к элементам с классами .banner, .profile, .show */
 .banner,
 .profile,
 .show {
-    height: auto;
-    width: 100%;
-    position: relative;
+    height: auto; /* Автоматическая высота */
+    width: 100%; /* Ширина 100% */
+    position: relative; /* Позиционирование для внутренних элементов */
 
+    /* Удаляем стандартные стили списков */
     ul {
         list-style: none;
         padding: 0;
         margin: 0;
     }
 
+    /* Список карточек слайда */
     .cards-list {
         position: relative;
         display: flex;
-        justify-content: center;
-        transition: all .3s ease-in-out;
-        overflow: hidden;
-
+        justify-content: center; /* Центрирование элементов */
+        transition: all 0.3s ease-in-out; /* Плавная анимация */
+        overflow: hidden; /* Прячем элементы за границами */
     }
 
+    /* Каждая карточка-слайд */
     .slide {
-        transition: opacity .3s ease-in-out, transform .3s ease-in-out;
-        position: absolute;
-        opacity: 0;
-        width: 100%;
-        height: 100%;
+        transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out; /* Анимация появления и перемещения */
+        position: absolute; /* Абсолютное позиционирование */
+        opacity: 0; /* Прозрачность по умолчанию */
+        width: 100%; /* Ширина слайда */
+        height: 100%; /* Высота слайда */
         top: 0;
-        z-index: 1;
-        display: none;
-        overflow: hidden;
-        transform: translateX(0);
-        user-select: none;
+        z-index: 1; /* Индекс слоя */
+        display: none; /* Не отображаем по умолчанию */
+        overflow: hidden; /* Скрываем излишки */
+        transform: translateX(0); /* Положение по умолчанию */
+        user-select: none; /* Отключаем возможность выделения текста */
         padding: 10px;
 
-
+        /* Карточка внутри слайда */
         .card {
-            height: 100%;
-           &:has(div){
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            gap: 10px;
-            div{
-                background: red;
-                border-radius: 50px;
-                flex :1;
-                box-shadow: 0 0 10px #000;
+            height: 100%; /* Карточка занимает всю высоту */
+           
+            /* Если внутри карточки есть div, применяем Flexbox */
+            &:has(div) {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                gap: 10px;
+
+                div {
+                    background: red; /* Красный фон для каждого div */
+                    border-radius: 50px; /* Закругленные углы */
+                    flex: 1; /* Гибкость для равномерного распределения */
+                    box-shadow: var(--box-shadow); /* Тень */
+                }
             }
-           }
-           &:not(&:has(div)){
-            &{
-                background: rgb(255, 220, 155);
-                border-radius: 50px;
-                font-size: 30px;
-                color: #000;
-                box-shadow: 0 0 10px #000;
+           
+            /* Если нет div, стили для обычной карточки */
+            &:not(:has(div)) {
+                background: rgb(255, 220, 155); /* Светлый фон */
+                border-radius: 50px; /* Закругленные углы */
+                font-size: 30px; /* Крупный текст */
+                color: #000; /* Цвет текста */
+                box-shadow: 0 0 10px #000; /* Тень */
             }
-           }
         }
 
+        /* Предыдущий слайд */
         &.prev {
             display: block;
             opacity: 1;
-            transform: translateX(-100%);
+            transform: translateX(-100%); /* Сдвиг влево */
         }
 
+        /* Активный слайд */
         &.active {
             display: block;
             opacity: 1;
             z-index: 2;
-            transform: translateX(0);
+            transform: translateX(0); /* Положение по центру */
         }
 
+        /* Следующий слайд */
         &.next {
             display: block;
             opacity: 1;
-            transform: translateX(100%);
+            transform: translateX(100%); /* Сдвиг вправо */
         }
     }
 
+    /* Список буллетов для пагинации */
     .bullets-list {
         display: flex;
-        justify-content: center;
-        transition: background .3s ease-in-out;
+        justify-content: center; /* Центрирование буллетов */
+        transition: background 0.3s ease-in-out;
         position: absolute;
-        left: 50%;
-        bottom: 0;
+        left: 50%; /* Центрирование по горизонтали */
+        bottom: 0; /* Позиция внизу */
         transform: translate(-50%, -50%);
-        z-index: 3;
+        z-index: 3; /* Слой выше остальных элементов */
 
+        /* Каждый буллет */
         .bullet {
-            display : inline-block;
+            display: inline-block;
             margin: 5px;
 
             .button {
                 width: 42px;
                 height: 42px;
-                border-radius: 50%;
-                background: #eee;
-                opacity: .5;
+                border-radius: 50%; /* Круглые кнопки */
+                background: #eee; /* Светлый фон */
+                opacity: 0.5; /* Полупрозрачность по умолчанию */
                 border: none;
-                cursor: pointer;
+                cursor: pointer; /* Курсор "указатель" при наведении */
                 transition: background 0.5s, opacity 0.5s;
-                box-shadow: 0 0 10px #000;
-                
+                box-shadow: var(--box-shadow); /* Тень */
             }
 
+            /* Буллеты для предыдущего, активного и следующего слайда */
             &.prev .button {
-                opacity: 1;
+                opacity: 1; /* Полная видимость */
             }
 
             &.active .button {
-                background: var(--decore-color);
+                background: var(--decore-color); /* Декоративный цвет для активного буллета */
                 opacity: 1;
             }
 
             &.next .button {
-                opacity: 1;
+                opacity: 1; /* Полная видимость */
             }
         }
     }
 
+    /* Кнопки переключения слайдов */
     .prev-button,
     .next-button {
         position: absolute;
         top: 50%;
         z-index: 3;
-        width :50px;
+        width: 50px;
         height: 50px;
         border-radius: 50px;
         border: none;
         outline: none;
         font-size: 50px;
-        color :var(--decore-color);
-        background: inherit;
+        color: var(--decore-color); /* Цвет стрелок */
+        background: inherit; /* Прозрачный фон */
         cursor: pointer;
-        text-shadow: 0 0 10px #000;
+        text-shadow: 0 0 10px #000; /* Тень для текста */
         transform: translate(0, -50%);
     }
 
+    /* Позиции кнопок переключения */
     .next-button {
-        right: 20px;
+        right: 20px; /* Кнопка справа */
     }
 
     .prev-button {
-        left: 20px;
+        left: 20px; /* Кнопка слева */
     }
 }
